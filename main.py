@@ -24,4 +24,3 @@ while True:
 battleshipGame = BattleshipGame(size, ships)
 
 battleshipGame.play()
-
