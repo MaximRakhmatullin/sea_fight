@@ -2,6 +2,7 @@ from field import Field
 import random
 from string import ascii_uppercase
 import constants
+from cheat import cheat_on
 
 
 class BattleshipGame:
@@ -50,7 +51,7 @@ class BattleshipGame:
         if self.player_field.grid[y][x] == constants.SHIP:
             self.player_field.grid[y][x] = constants.DESTROYED_SHIP
             self.player_field.ships_alive -= 1
-            print(f"Компьютер попал по {ascii_uppercase[x]} {y}")
+            print(f"Компьютер попал по {ascii_uppercase[x]} {y + 1}")
         else:
             self.player_field.grid[y][x] = constants.MISS
             print("Компьютер промахнулся!")
@@ -75,12 +76,16 @@ class BattleshipGame:
     def play(self) -> None:
         self.__place_ships_randomly(self.computer_field, self.ships)
         self.__place_ships_randomly(self.player_field, self.ships)
+
+        cheat_or_not = cheat_on()
+
         while True:
             print("Расстановка кораблей компьютера:")
-            self.computer_field.display()
-            # self.computer_field.display(show_ships=True)
+            self.computer_field.display(show_ships=cheat_or_not)
+
             print("Ваша расстановка кораблей:")
             self.player_field.display(show_ships=True)
+
             x, y = self.__player_input()
             self.player_turn(x, y)
 
