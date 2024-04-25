@@ -77,8 +77,8 @@ class BattleshipGame:
         self.__place_ships_randomly(self.player_field, self.ships)
         while True:
             print("Расстановка кораблей компьютера:")
-            # self.computer_field.display()
-            self.computer_field.display(show_ships=True)
+            self.computer_field.display()
+            # self.computer_field.display(show_ships=True)
             print("Ваша расстановка кораблей:")
             self.player_field.display(show_ships=True)
             x, y = self.__player_input()
