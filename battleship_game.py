@@ -70,6 +70,9 @@ class BattleshipGame:
                       f" {ascii_uppercase[self.size - 1]} включительно")
             elif y <= 0 or y > self.size:
                 print(f"Координата по вертикали должна быть в диапазоне от 1 до {self.size} включительно")
+            elif (self.computer_field.grid[y - 1][ascii_uppercase.index(x)] == constants.DESTROYED_SHIP or
+                  self.computer_field.grid[y - 1][ascii_uppercase.index(x)] == constants.MISS):
+                print(f'Вы уже били по этому полю')
             else:
                 return x, y
 
@@ -77,11 +80,11 @@ class BattleshipGame:
         self.__place_ships_randomly(self.computer_field, self.ships)
         self.__place_ships_randomly(self.player_field, self.ships)
 
-        cheat_or_not = cheat_on()
+        is_visible = cheat_on()
 
         while True:
             print("Расстановка кораблей компьютера:")
-            self.computer_field.display(show_ships=cheat_or_not)
+            self.computer_field.display(show_ships=is_visible)
 
             print("Ваша расстановка кораблей:")
             self.player_field.display(show_ships=True)
